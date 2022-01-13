@@ -1,0 +1,40 @@
+//variables
+$resolutions: 1600px, 1200px, 1168px, 768px, 320px
+$const: 150
+
+
+
+//styles
+main
+  background: red
+  width: $const*4+10*4 + px
+  margin: 0 auto
+  section
+    div
+      width: 100px
+      height: 100px
+      margin: 10px
+      @for $i from 1 to 6
+        &-item-#{$i}
+          background-image: url("img/#{$i}.jpg")
+      img
+        width: $const
+  @each $resolution in $resolutions               //  *********** media **********
+    @media screen and (max-width: $resolution)
+      max-width: $resolution - 50px
+        @if $resolution >= 1200px
+          border: 1px solid
+
+        @if $resolution >= 768px
+          border: 2px dotted
+
+        @if $resolution >= 320px                  //  *********** END media **********
+          border: 3px double
+
+
+
+
+
+
+
+
