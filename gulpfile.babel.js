@@ -21,10 +21,16 @@ const concatCss = () =>
     .pipe(concat('all.css'))
     .pipe(gulp.dest('./dist/css/'));
 
+const concatHtml = () =>
+    gulp.src('./src/css/*.css')
+        .pipe(concat('all.css'))
+        .pipe(gulp.dest('./dist/css/'));
+
 
 gulp.task("moveCSS", moveCSS);
 gulp.task("moveIMG", moveIMG);
 gulp.task("concatCss", concatCss);
+gulp.task("concatHtml", concatHtml);
 
 // gulp.parallel принимает название функций, которые должны выполняться
 // gulp.task("moveFiles", gulp.parallel(moveCSS, moveIMG));
