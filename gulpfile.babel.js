@@ -5,7 +5,7 @@ const gulp = require("gulp"); // сохраняем в переменную gulp
 const del = require('del');
 const plumber = require('gulp-plumber');
 var concat = require('gulp-concat'); //конкатенирование файлов
-
+const fileinclude = require('gulp-file-include'); //ипортирование частей
 
 
 const moveCSS = () => 
@@ -21,22 +21,22 @@ const concatCss = () =>
     .pipe(concat('all.css'))
     .pipe(gulp.dest('./dist/css/'));
 
-const concatHtml = () =>
-    gulp.src('./src/css/*.css')
-        .pipe(concat('all.css'))
-        .pipe(gulp.dest('./dist/css/'));
+const moveHtml = () =>
+    gulp.src('./src/*.html')
+    .pipe(fileinclude())
+    .pipe(gulp.dest('./dist/'));
 
 
 gulp.task("moveCSS", moveCSS);
 gulp.task("moveIMG", moveIMG);
 gulp.task("concatCss", concatCss);
-gulp.task("concatHtml", concatHtml);
+gulp.task("moveHtml", moveHtml);
 
 // gulp.parallel принимает название функций, которые должны выполняться
 // gulp.task("moveFiles", gulp.parallel(moveCSS, moveIMG));
 
 // Если же названия указаны в кавычках, то это - название тасок. Если эти таски не было созданы, то команда gulp moveFiles вызовет  ошибку
-gulp.task("moveFiles", gulp.parallel("concatCss", "moveIMG"));
+gulp.task("moveFiles", gulp.parallel("concatCss", "moveIMG", "moveHtml"));
 //gulp.task("moveFiles2", gulp.parallel(moveCSS, moveIMG));
 /*
 gulp.task("moveFiles2", ()=>{
@@ -48,6 +48,7 @@ const watch = () => {
 	gulp.watch('./src/css/*.css', concatCss);
     //gulp.watch('./src/css/*.css', moveCSS);
     gulp.watch('./src/image/**/*.jpg', moveIMG);
+    gulp.watch('./src/**/*.html', moveHtml);
 }
 
 const delDist = () => {
