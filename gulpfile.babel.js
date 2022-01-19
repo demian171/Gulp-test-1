@@ -5,8 +5,9 @@ const gulp = require("gulp"); // сохраняем в переменную gulp
 const del = require('del');
 const plumber = require('gulp-plumber');
 const concat = require('gulp-concat'); //конкатенирование файлов
-
+const autoprefixer = require('gulp-autoprefixer');
 const sass = require('gulp-sass')(require('sass'));
+var sourcemaps = require('gulp-sourcemaps');
 
 const fileinclude = require('gulp-file-include'); //ипортирование частей
 
@@ -29,25 +30,41 @@ const moveHtml = () =>
     .pipe(fileinclude())
     .pipe(gulp.dest('./dist/'));
 
-
-function buildStyles() {
-    return gulp.src('./src/sass/**/*.sass')
-        //.pipe(sass().on('error', sass.logError))
+const buildStyles = () =>
+    gulp.src('./src/sass/**/*.sass')
+    .pipe(sass().on('error', sass.logError))
+        //.pipe(sass())
         .pipe(concat('all.css'))
         .pipe(gulp.dest('./dist/css'));
+
+function buildScss() {
+    return gulp.src('./src/scss/**/*.scss')
+        .pipe(sourcemaps.init())
+        .pipe(sass.sync({
+            //outputStyle: 'compressed'
+        }
+        ).on('error', sass.logError))
+        .pipe(concat('main.css'))
+        .pipe(autoprefixer({
+            cascade: false
+        }))
+        .pipe(sourcemaps.write())
+        .pipe(gulp.dest('./dist/css'));
 };
+
 
 gulp.task("moveCSS", moveCSS);
 gulp.task("moveIMG", moveIMG);
 gulp.task("concatCss", concatCss);
 gulp.task("moveHtml", moveHtml);
 gulp.task("buildStyles", buildStyles);
+gulp.task("buildScss", buildScss);
 
 // gulp.parallel принимает название функций, которые должны выполняться
 // gulp.task("moveFiles", gulp.parallel(moveCSS, moveIMG));
 
 // Если же названия указаны в кавычках, то это - название тасок. Если эти таски не было созданы, то команда gulp moveFiles вызовет  ошибку
-gulp.task("moveFiles", gulp.parallel("buildStyles", "moveIMG", "moveHtml"));
+gulp.task("moveFiles", gulp.parallel("buildScss", "moveIMG", "moveHtml"));
 //gulp.task("moveFiles2", gulp.parallel(moveCSS, moveIMG));
 /*
 gulp.task("moveFiles2", ()=>{
@@ -59,7 +76,8 @@ const watch = () => {
 	//gulp.watch('./src/css/*.css', concatCss);
     //gulp.watch('./src/css/*.css', moveCSS);
     gulp.watch('./src/image/**/*.jpg', moveIMG);
-    gulp.watch('./sass/**/*.sass', moveHtml);
+    //gulp.watch('./src/sass/**/*.sass', buildStyles);
+    gulp.watch('./src/scss/**/*.scss', buildScss);
     gulp.watch('./src/**/*.html', moveHtml);
 }
 
