@@ -56,6 +56,37 @@ main {
 .content {
   grid-area: content;
   background: #d48d8d;
+  .news {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    .news_item {
+      padding: 15px;
+      border: 1px solid gray;
+      display: grid;
+      grid-template-columns: 140px auto;
+      background: white;
+      .news__item_txt_block {
+        padding-left: 10px;
+        .txt_block_header {
+          font-weight: bold;
+          font-size: 16px;
+          line-height: 30px;
+          color: #4E4E4E;
+        }
+        .txt_block_info {
+          font-size: 12px;
+          line-height: 20px;
+          color: #7C7C7C;
+        }
+        .txt_block_text {
+          font-size: 14px;
+          line-height: 26px;
+          color: #5C5C5C;
+        }
+      }
+    }
+  }
 }
 
 .footer {
