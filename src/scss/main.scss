@@ -1,37 +1,79 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700&display=swap');
+
 //variables
 $resolutions: 1600px, 1200px, 1168px, 768px, 320px;
 $const: 150;
 
 //styles
 body {
-  background: black;
-  color: blue;
-  main {
-    background: white;
-  }
-}
-
-main {
-  background: red;
-  width: $const*4+10*4 + px;
-  margin: 0 auto;
-  max-width: 100px;
-  section {
-    background: gray;
-    width: 100px;
-    height: 600px;
-  }
-}
-
-main {
-  display: grid;
-  transition: all .5s;
-  user-select: none;
-  background: linear-gradient(to bottom, white, black);
-  border: 1px solid gray;
+  font-family: Roboto;
   font-size: 14px;
 }
 
+main {
+  width: 1170px;
+  max-width: calc(100% - 30px);
+  margin: 0 auto;
+  display: grid;
+  transition: all .5s;
+  user-select: none;
+  //background: linear-gradient(to bottom, white, black);
+  border: 1px solid gray;
+  font-size: 14px;
+  img {
+    width: 100%;
+  }
+}
+
+
+.header {
+  grid-area: header;
+  //background: #70d470;
+  .navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    max-width: 900px;
+    margin: 0 auto;
+    height: 60px;
+    font-size: 16px;
+    a {
+      font-style: normal;
+      font-weight: normal;
+      font-size: 11px;
+      line-height: 22px;
+      /* identical to box height, or 200% */
+      display: flex;
+      align-items: center;
+      letter-spacing: 1.1px;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: #4E4E4E;
+    }
+  }
+}
+
+.content {
+  grid-area: content;
+  background: #d48d8d;
+}
+
+.footer {
+  grid-area: footer;
+  //background: #87aabd;
+}
+
+main .wrapper {
+  display: grid;
+  grid-gap: 10px;
+  //grid-template-columns: 120px 120px;
+  grid-template-areas:
+          "header"
+          "content"
+          "footer ";
+  background-color: #fff;
+  color: #444;
+}
 
 
 

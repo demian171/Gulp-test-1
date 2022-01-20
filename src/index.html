@@ -2,20 +2,40 @@
 <html lang="ru">
 
 @@include('html/head.html',{
-    "title":"Главная"
+"title":"Главная"
 })
 
 <body>
 @@include('html/header.html',{})
-
-
-
 <main>
-    <section class="sec1 first">
-        <div class="main_img">
+
+
+    <div class="wrapper">
+        <div class="header">
+            <div class="navbar">
+                <a class="navbar-nav-item" href="/">home</a>
+                <a class="navbar-nav-item" href="/">about us</a>
+                <a class="navbar-nav-item" href="/">our journal</a>
+                <a class="navbar-nav-item" href="/">projects</a>
+                <a class="navbar-nav-item" href="/">news</a>
+                <a class="navbar-nav-item" href="/">features</a>
+                <a class="navbar-nav-item" href="/">contact</a>
+            </div>
+        </div>
+        <div class="content">
+            <br/>
             <img src="img/main.jpg">
+            <br/>
+            <br/>
+            <br/>
 
         </div>
+        <div class="footer">Footer</div>
+    </div>
+
+
+    <section class="sec1 first">
+
         <div class="main_info">
             <div class="main_info_h">
 
@@ -30,10 +50,10 @@
                         Фото, Журнал / 9 комментариев
                     </div>
                     <div class="main_info_blocks_block_text">
-                        Немного текста — пост пикабушника 241razaB. Комментариев - 6, сохранений - 3. Присоединяйтесь к обсуждению или опубликуйте свой пост!
+                        Немного текста — пост пикабушника 241razaB. Комментариев - 6, сохранений - 3. Присоединяйтесь к
+                        обсуждению или опубликуйте свой пост!
                     </div>
                 </div>
-
 
 
             </div>
@@ -42,10 +62,8 @@
     <section class="sec2">
 
     </section>
-
 </main>
-
 @@include('html/footer.html',{})
-.
+
 </body>
 </html>
